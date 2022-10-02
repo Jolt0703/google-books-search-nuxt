@@ -1,0 +1,20 @@
+{
+	"Nuxt Class Decorator": {
+		"scope": "javascript,typescript",
+		"prefix": "ncd",
+		"body": [
+			"import { Component, Vue } from 'nuxt-property-decorator';\n",
+			"@Component",
+			"export default class $1 extends Vue {}"
+		],
+	},
+	"Vue Class Decorator": {
+		"scope": "javascript,typescript",
+		"prefix": "vcd",
+		"body": [
+			"import { Component, Vue } from 'vue-property-decorator';\n",
+			"@Component",
+			"export default class $1 extends Vue {}"
+		],
+	},
+}
