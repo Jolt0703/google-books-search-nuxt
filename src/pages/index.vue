@@ -4,7 +4,7 @@
       <Search />
       <v-card class="logo py-4 d-flex justify-center">
         <NuxtLogo />
-        {{ queryParams.search }}
+        {{ books }}
         <VuetifyLogo />
       </v-card>
     </v-col>
@@ -13,15 +13,66 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator';
-import { QueryParams } from '@/types';
+import { Context } from '@nuxt/types';
+import { NavigationGuard } from 'vue-router';
+import { QueryBase, QueryParams } from '@/types';
+
+Component.registerHooks(['beforeRouteUpdate', 'beforeRouteEnter']);
 
 @Component
 export default class IndexPage extends Vue {
-  queryParams: QueryParams = {};
+  beforeRouteUpdate: NavigationGuard = async (to, _from, next) => {
+    console.log('beforeRouteUpdate');
+    await this.fetchData(to.query);
+    next();
+  };
+
+  beforeRouteEnter: NavigationGuard = async (to, _from, next) => {
+    console.log('beforeRouteEnter');
+    await this.fetchData(to.query);
+    next();
+  };
 
   @Watch('$route.query', { immediate: true })
-  onChangeQueryParams(query: QueryParams) {
-    this.queryParams = { ...query };
+  watchRouteQuery = async (query: QueryBase) => {
+    console.log('watchRouteQuery');
+    await this.fetchData(query);
+  };
+
+  async asyncData({ query, store }: Context) {
+    console.log('asyncdata呼ばれたよ!', query);
+
+    if (!query || !query.search) return;
+    const queryParams: QueryParams = {};
+    if (query.search && typeof query.search === 'string') {
+      queryParams.search = query.search;
+    }
+    if (query.page && typeof query.page === 'string') {
+      queryParams.page = Number.parseInt(query.page);
+    }
+    if (query.maxResults && typeof query.maxResults === 'string') {
+      queryParams.maxResults = Number.parseInt(query.maxResults);
+    }
+    await store.dispatch('fetchBooksData', queryParams);
+  }
+
+  async fetchData(query: QueryBase) {
+    if (!query || !query.search) return;
+    const queryParams: QueryParams = {};
+    if (typeof query.search === 'string') {
+      queryParams.search = query.search;
+    }
+    if (query.page && typeof query.page === 'string') {
+      queryParams.page = Number.parseInt(query.page);
+    }
+    if (query.maxResults && typeof query.maxResults === 'string') {
+      queryParams.maxResults = Number.parseInt(query.maxResults);
+    }
+    await this.$store.dispatch('fetchBooksData', queryParams);
+  }
+
+  get books() {
+    return this.$store.getters.books;
   }
 }
 </script>

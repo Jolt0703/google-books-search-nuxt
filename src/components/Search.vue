@@ -15,14 +15,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import { QueryBase, QueryParams } from '@/types';
+import { QueryBase } from '@/types';
 
 @Component
 export default class Search extends Vue {
   searchKeyword = '';
 
   onSubmit() {
-    this.push<QueryParams>({ search: this.searchKeyword });
+    this.push({ search: this.searchKeyword });
   }
 
   push<T extends QueryBase>(params: T) {
