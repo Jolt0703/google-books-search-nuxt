@@ -1,10 +1,9 @@
 <template>
-  <v-app>
-    <LayoutsHeader />
-    <LayoutsMainContents>
-      <Nuxt />
-    </LayoutsMainContents>
-  </v-app>
+  <v-main>
+    <v-container>
+      <slot></slot>
+    </v-container>
+  </v-main>
 </template>
 
 <script lang="ts">
