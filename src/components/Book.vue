@@ -39,6 +39,7 @@ export default class extends Vue {
   line-height: $font-size-root;
   padding: $card-text-padding;
 }
+
 .v-card__text {
   font-size: $font-size-book-author;
   line-height: $font-size-root;
