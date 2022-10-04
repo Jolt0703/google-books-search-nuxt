@@ -1,7 +1,7 @@
 <template>
   <v-card height="300px" width="220px">
     <v-layout column justify-space-between align-content-space-between fill-height>
-      <v-flex><v-img :src="book.volumeInfo.imageLinks?.thumbnail" height="180px"></v-img></v-flex>
+      <v-flex><v-img :src="thumbnail" height="180px"></v-img></v-flex>
       <v-flex><v-card-title v-text="title"></v-card-title></v-flex>
       <v-flex><v-card-text v-text="author"></v-card-text></v-flex>
     </v-layout>
@@ -24,6 +24,11 @@ export default class extends Vue {
   get author() {
     if (!this.book.volumeInfo.authors) return '';
     return this.book.volumeInfo.authors[0];
+  }
+
+  get thumbnail() {
+    if (!this.book.volumeInfo.imageLinks) return '/thumbnail-placeholder.svg';
+    return this.book.volumeInfo.imageLinks.thumbnail;
   }
 }
 </script>
