@@ -6,7 +6,7 @@ export type QueryParams = {
   search?: string;
   page?: number;
   maxResults?: number;
-} | QueryBase;
+};
 
 type BookDetail = {
   title: string;

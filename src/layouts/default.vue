@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <LayoutsHeader />
-    <LayoutsMainContents>
+    <Header />
+    <MainContents>
       <Nuxt />
-    </LayoutsMainContents>
+    </MainContents>
   </v-app>
 </template>
 

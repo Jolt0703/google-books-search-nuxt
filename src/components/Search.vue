@@ -4,7 +4,7 @@
       <v-row align="center" justify="center">
         <v-col cols="11">
           <v-text-field
-            v-model="searchKeyword"
+            v-model="search"
             type="text"
             placeholder="キーワードで書籍を検索する…"
             color="teal"
@@ -24,10 +24,10 @@ import { QueryBase } from '@/types';
 
 @Component
 export default class extends Vue {
-  searchKeyword = '';
+  search = '';
 
   onSubmit() {
-    this.push({ search: this.searchKeyword });
+    this.push({ search: this.search });
   }
 
   push<T extends QueryBase>(params: T) {

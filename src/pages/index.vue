@@ -1,8 +1,9 @@
 <template>
-  <LayoutsContainer>
+  <Container>
     <Search />
     <Books />
-  </LayoutsContainer>
+    <Pagination />
+  </Container>
 </template>
 
 <script lang="ts">
@@ -37,7 +38,11 @@ export default class IndexPage extends Vue {
     if (query.maxResults && typeof query.maxResults === 'string') {
       queryParams.maxResults = Number.parseInt(query.maxResults);
     }
-    await this.$store.dispatch('fetchBooksData', queryParams);
+    try {
+      await this.$store.dispatch('fetchBooksData', queryParams);
+    } catch (e: any) {
+      this.$nuxt.error({ statusCode: 500, message: e.message });
+    }
   }
 
   get books(): Book[] {

@@ -1,12 +1,11 @@
 <template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/"> Home page </NuxtLink>
+  <v-app>
+    <Header />
+    <MainContents>
+      <Container>
+        <Search />
+      </Container>
+    </MainContents>
   </v-app>
 </template>
 
@@ -14,9 +13,7 @@
 import { NuxtError } from '@nuxt/types';
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
-@Component({
-  layout: 'empty',
-})
+@Component
 export default class ErrorLayout extends Vue {
   @Prop({ required: true })
   error!: NuxtError;
