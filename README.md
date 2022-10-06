@@ -1,5 +1,10 @@
 # google-books-search-nuxt
 
+[Live Demo](https://google-books-search-nuxt.vercel.app/)
+
+![google-books-search-nuxt-demo](https://user-images.githubusercontent.com/61738234/194365732-c943cc8d-a135-4b75-8ef7-fd56b3ea909d.gif)
+
+
 ## Build Setup
 
 ```bash
