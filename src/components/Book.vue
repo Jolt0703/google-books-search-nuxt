@@ -1,7 +1,17 @@
 <template>
-  <v-card height="300px" width="220px">
+  <v-card height="270px" width="140px">
     <v-layout column justify-space-between align-content-space-between fill-height>
-      <v-flex><v-img :src="thumbnail" height="180px"></v-img></v-flex>
+      <v-flex>
+        <a :href="infoLink" target="_blank">
+          <v-img class="book__thumbnail" :src="thumbnail" lazy-src="/thumbnail-placeholder.svg" height="180px">
+            <template #placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </a>
+      </v-flex>
       <v-flex><v-card-title v-text="title"></v-card-title></v-flex>
       <v-flex><v-card-text v-text="author"></v-card-text></v-flex>
     </v-layout>
@@ -27,8 +37,12 @@ export default class extends Vue {
   }
 
   get thumbnail() {
-    if (!this.book.volumeInfo.imageLinks) return '/thumbnail-placeholder.svg';
+    if (!this.book.volumeInfo.imageLinks) return '/thumbnail-not-found.svg';
     return this.book.volumeInfo.imageLinks.thumbnail;
+  }
+
+  get infoLink() {
+    return this.book.volumeInfo.infoLink;
   }
 }
 </script>
@@ -44,5 +58,13 @@ export default class extends Vue {
   font-size: $font-size-book-author;
   line-height: $font-size-root;
   padding: $card-text-padding;
+}
+
+.book__thumbnail {
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15), 0 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
 }
 </style>

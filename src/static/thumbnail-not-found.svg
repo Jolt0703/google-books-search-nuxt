@@ -1,0 +1,12 @@
+<svg width="100%" height="170"
+  xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap">
+  <defs>
+    <style>
+      <![CDATA[@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");]]>
+      .cls-1{font-family: 'Roboto', sans-serif;}
+    </style>
+  </defs>
+  <title>Book Not Found</title>
+  <rect fill="#868e96" width="100%" height="100%" />
+  <text class="cls-1" fill="#dee2e6" dy=".3em" x="50%" y="50%" text-anchor="middle">Not Found</text>
+</svg>

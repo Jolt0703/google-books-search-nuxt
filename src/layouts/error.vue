@@ -1,10 +1,7 @@
 <template>
   <v-app>
     <Header />
-    <Container>
-      <Search />
-      <h3 class="error-message" color="error">{{ error.message }}</h3>
-    </Container>
+    <h3 class="error-message" color="error">{{ error.message }}</h3>
   </v-app>
 </template>
 
