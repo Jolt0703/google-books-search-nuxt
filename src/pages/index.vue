@@ -27,7 +27,10 @@ export default class IndexPage extends Vue {
   }
 
   async fetchData(query: QueryBase) {
-    if (!query || !query.search) return;
+    if (!query || !query.search) {
+      this.$store.dispatch('initializeState');
+      return;
+    }
     const queryParams: QueryParams = {};
     if (typeof query.search === 'string') {
       queryParams.search = query.search;
@@ -41,7 +44,8 @@ export default class IndexPage extends Vue {
     try {
       await this.$store.dispatch('fetchBooksData', queryParams);
     } catch (e: any) {
-      this.$nuxt.error({ statusCode: 500, message: e.message });
+      console.error(e);
+      this.$nuxt.error({ statusCode: 500, message: '書籍情報が取得できませんでした。' });
     }
   }
 

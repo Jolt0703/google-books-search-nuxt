@@ -1,6 +1,6 @@
 <template>
   <div v-show="totalItems" class="text-center">
-    <v-pagination :value="page" :length="length" total-visible="10" color="nuxt" circle @input="onInput"></v-pagination>
+    <v-pagination :value="page" :length="length" total-visible="8" color="nuxt" circle @input="onInput"></v-pagination>
   </div>
 </template>
 

@@ -1,11 +1,10 @@
 <template>
   <v-app>
     <Header />
-    <MainContents>
-      <Container>
-        <Search />
-      </Container>
-    </MainContents>
+    <Container>
+      <Search />
+      <h3 class="error-message" color="error">{{ error.message }}</h3>
+    </Container>
   </v-app>
 </template>
 
@@ -30,8 +29,9 @@ export default class ErrorLayout extends Vue {
 }
 </script>
 
-<style scoped>
-h1 {
-  font-size: 20px;
+<style lang="scss" scoped>
+.error-message {
+  text-align: center;
+  color: $font-color-error;
 }
 </style>

@@ -2,7 +2,7 @@ import { GetterTree, ActionTree, MutationTree } from 'vuex';
 
 import { QueryParams, ResponseData, State } from '@/types';
 
-const API_KEY = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
+const API_KEY = process.env.NUXT_APP_GOOGLE_BOOKS_API_KEY;
 const GOOGLE_BOOKS_ENDPOINT = 'https://www.googleapis.com/books/v1/volumes';
 
 const initialState: State = {
@@ -16,7 +16,7 @@ const initialState: State = {
   isError: false,
 };
 
-export const state: () => State = () => initialState;
+export const state: () => State = () => ({ ...initialState });
 
 export type RootState = ReturnType<typeof state>;
 
@@ -53,20 +53,18 @@ export const mutations: MutationTree<RootState> = {
 
 export const actions: ActionTree<RootState, RootState> = {
   async fetchBooksData({ commit }, payload: QueryParams) {
-    const { search, page, maxResults } = payload;
-    const _page = page ?? initialState.currentPage;
-    const _maxResults = maxResults ?? initialState.maxResults;
-    const startIndex = (_page - 1) * _maxResults;
+    const { search, page = initialState.currentPage, maxResults = initialState.maxResults } = payload;
+    const startIndex = (page - 1) * maxResults;
     const params = {
       q: search,
-      _maxResults,
+      maxResults,
       startIndex,
       key: API_KEY,
     };
     const data = await this.$axios.$get<ResponseData>(GOOGLE_BOOKS_ENDPOINT, { params });
     if (!data.items) throw new Error('No items found');
     data.search = search ?? '';
-    data.currentPage = _page;
+    data.currentPage = page;
     commit('UPDATE_STATE', data);
   },
   initializeState({ commit }) {
