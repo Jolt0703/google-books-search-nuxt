@@ -1,10 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title>
-        Google Books Search
-        <small>with Nuxt</small>
-      </v-toolbar-title>
+      <v-toolbar-title> Vue-Swiper </v-toolbar-title>
     </v-app-bar>
     <v-main>
       <v-container>
